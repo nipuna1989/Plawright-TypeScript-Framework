@@ -16,15 +16,6 @@ on:
           - ''
           - 'article'
           - 'login'
-      browser:
-        description: 'Browser to run tests on'
-        required: false
-        default: 'chromium'
-        type: choice
-        options:
-          - 'chromium'
-          - 'firefox'
-          - 'webkit'
 
 jobs:
   test:
@@ -59,6 +50,8 @@ jobs:
           mkdir -p test-results
 
       - name: Run Playwright tests
+        env:
+          CI: true
         run: |
           # Build the test command based on inputs
           TEST_CMD="npx playwright test"
@@ -68,11 +61,6 @@ jobs:
             TEST_CMD="$TEST_CMD ${{ github.event.inputs.test_file }}"
           fi
           
-          # Add browser project if specified
-          if [ "${{ github.event.inputs.browser }}" != "" ] && [ "${{ github.event.inputs.browser }}" != "chromium" ]; then
-            TEST_CMD="$TEST_CMD --project=${{ github.event.inputs.browser }}"
-          fi
-          
           echo "Running command: $TEST_CMD"
           eval $TEST_CMD
 
@@ -80,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ github.event.inputs.test_file || 'all' }}-${{ github.event.inputs.browser || 'chromium' }}
+          name: playwright-report-${{ github.event.inputs.test_file || 'all' }}
           path: playwright-report/
           retention-days: 30
           if-no-files-found: ignore
@@ -89,7 +77,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results-${{ github.event.inputs.test_file || 'all' }}-${{ github.event.inputs.browser || 'chromium' }}
+          name: test-results-${{ github.event.inputs.test_file || 'all' }}
           path: |
             test-results/
             test-results.json

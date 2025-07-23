@@ -14,9 +14,7 @@
     "test:login": "npx playwright test login", 
     "test:login:headed": "npx playwright test login --headed",
     "test:login:debug": "npx playwright test login --debug",
-    "test:chromium": "npx playwright test --project=chromium",
-    "test:firefox": "npx playwright test --project=firefox",
-    "test:webkit": "npx playwright test --project=webkit"
+    "test:update-snapshots": "npx playwright test --update-snapshots"
   },
   "keywords": [],
   "author": "",
