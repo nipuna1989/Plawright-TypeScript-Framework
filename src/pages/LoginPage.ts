@@ -1,6 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { HomePage } from './HomePage';
-import { takeVisualSnapshot } from '../utils/utilities';
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
@@ -53,10 +52,8 @@ export class LoginPage extends BasePage {
   async loginWithValidCredentials(email: string, password: string): Promise<boolean> {
     try {
       console.log('Logging in with valid credentials');
-      await takeVisualSnapshot(this.page, 'before-valid-login');
       await this.fillLoginFormAndClick(email, password);
       await this.waitForPageToLoad();
-      await takeVisualSnapshot(this.page, 'after-valid-login-submit');
       await this.page.waitForURL('/#/');
       
       // Check authentication state
@@ -65,11 +62,9 @@ export class LoginPage extends BasePage {
       
       if (isAuthenticated) {
         console.log('Successfully logged in and user is fully authenticated');
-        await takeVisualSnapshot(this.page, 'valid-login-success');
         return true;
       } else {
         console.log('Login completed but user authentication verification failed');
-        await takeVisualSnapshot(this.page, 'valid-login-failed');
         return false;
       }
     } catch (error) {
@@ -86,10 +81,8 @@ export class LoginPage extends BasePage {
    */
   async loginWithInvalidEmail(email: string, password: string): Promise<string> {
     console.log('Logging in with invalid email');
-    await takeVisualSnapshot(this.page, 'before-invalid-email-login');
     await this.fillLoginFormAndClick(email, password);
     await this.page.waitForSelector('ul.error-messages');
-    await takeVisualSnapshot(this.page, 'invalid-email-error-displayed');
     const errorMessage = await this.page.locator('ul.error-messages li').textContent();
     console.log('Error message:', errorMessage);
     return errorMessage || '';
@@ -103,10 +96,8 @@ export class LoginPage extends BasePage {
    */
   async loginWithWrongPassword(email: string, password: string): Promise<string> {
     console.log('Logging in with wrong password');
-    await takeVisualSnapshot(this.page, 'before-wrong-password-login');
     await this.fillLoginFormAndClick(email, password);
     await this.page.waitForSelector('ul.error-messages');
-    await takeVisualSnapshot(this.page, 'wrong-password-error-displayed');
     const errorMessage = await this.page.locator('ul.error-messages li').textContent();
     console.log('Error message:', errorMessage);
     return errorMessage || '';
