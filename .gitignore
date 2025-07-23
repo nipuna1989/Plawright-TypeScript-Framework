@@ -141,3 +141,6 @@ config/local.js
 
 # Test artifacts that shouldn't be committed
 error-context.md
+
+# GitHub Actions (keep workflows)
+!.github/

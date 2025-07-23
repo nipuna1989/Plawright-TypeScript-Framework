@@ -17,7 +17,7 @@ export default defineConfig({
   ],
 
   use: {
-    headless: false, // Changed to false for headed mode by default
+    headless: true, // Use headless mode in CI, can be overridden locally
     baseURL: 'https://conduit-realworld-example-app.fly.dev',
     viewport: { width: 1280, height: 720 },
     
