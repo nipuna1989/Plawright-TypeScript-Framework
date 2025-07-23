@@ -5,6 +5,26 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      test_file:
+        description: 'Test file to run (e.g., article, login, or leave empty for all tests)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - 'article'
+          - 'login'
+      browser:
+        description: 'Browser to run tests on'
+        required: false
+        default: 'chromium'
+        type: choice
+        options:
+          - 'chromium'
+          - 'firefox'
+          - 'webkit'
 
 jobs:
   test:
@@ -39,13 +59,28 @@ jobs:
           mkdir -p test-results
 
       - name: Run Playwright tests
-        run: npm run test
+        run: |
+          # Build the test command based on inputs
+          TEST_CMD="npx playwright test"
+          
+          # Add test file if specified
+          if [ "${{ github.event.inputs.test_file }}" != "" ]; then
+            TEST_CMD="$TEST_CMD ${{ github.event.inputs.test_file }}"
+          fi
+          
+          # Add browser project if specified
+          if [ "${{ github.event.inputs.browser }}" != "" ] && [ "${{ github.event.inputs.browser }}" != "chromium" ]; then
+            TEST_CMD="$TEST_CMD --project=${{ github.event.inputs.browser }}"
+          fi
+          
+          echo "Running command: $TEST_CMD"
+          eval $TEST_CMD
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-${{ github.event.inputs.test_file || 'all' }}-${{ github.event.inputs.browser || 'chromium' }}
           path: playwright-report/
           retention-days: 30
           if-no-files-found: ignore
@@ -54,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results
+          name: test-results-${{ github.event.inputs.test_file || 'all' }}-${{ github.event.inputs.browser || 'chromium' }}
           path: |
             test-results/
             test-results.json

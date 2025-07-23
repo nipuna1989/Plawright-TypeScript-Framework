@@ -181,8 +181,7 @@ export class NewArticlePage extends BasePage {
         }
       }      
       console.log(`Tags verification passed: "${actualTagsValue}"`);
-
-      console.log('All field verifications passed - data is correctly populated');
+      console.log('All field verifications passed!');
       return true;
     } catch (error) {
       console.log('Error verifying article fields data:', error);
