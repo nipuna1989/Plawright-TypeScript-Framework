@@ -10,9 +10,8 @@ test.describe('Article Lifecycle Test', () => {
     newArticlePage, 
     articleDetailPage 
   }) => {
-    // Generate unique test data
-    const randomId = Math.floor(Math.random() * (999999 - 10000 + 1)) + 10000;
-    const testArticle = getTestArticle(randomId.toString());
+    // Generate test article with auto-generated ID
+    const testArticle = getTestArticle();
 
     // Get valid credentials from test data
     const validCredentials = loginTestData.find((data: any) => data.scenario === 'valid');

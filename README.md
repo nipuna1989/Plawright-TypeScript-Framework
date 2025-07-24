@@ -44,10 +44,12 @@ remwaste-ui-framework/
 │   │   ├── HomePage.ts              # Home page object
 │   │   ├── LoginPage.ts             # Login page object
 │   │   └── NewArticlePage.ts        # New article creation page object
+│   └── utils/
+│       └── utilities.ts             # Common utility functions
 ├── tests/
 │   ├── article.spec.ts              # Article lifecycle tests
 │   ├── login.spec.ts                # Login functionality tests
-│   ├── utils/                       # Test fixtures
+│   └── utils/                       # Test fixtures
 ├── test-results/                    # Test execution results
 ├── playwright-report/               # HTML test reports
 ├── playwright.config.ts             # Playwright configuration
