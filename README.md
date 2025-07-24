@@ -15,6 +15,7 @@ A Playwright-based test automation framework for the RemWaste assignment, featur
 - [Available Scripts](#available-scripts)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
+- [Limitations](#limitations)
 
 ## Overview
 
@@ -207,4 +208,22 @@ Each page extends `BasePage` and provides:
 - **Custom fixtures** for page object injection
 - **Test setup and teardown** helpers
 
----
+## Limitations
+
+### GitHub Actions Workflow Access
+While this repository is public and anyone can view and fork it, there are some inherent limitations with GitHub Actions:
+
+- **Manual Test Triggers**: Only repository collaborators (users with write access) can manually trigger the test workflow from the Actions tab.
+  - This is a GitHub security feature to protect repositories from potential abuse.
+  - External contributors can still:
+    - View all test runs and their results
+    - Have tests automatically run on their Pull Requests
+    - Fork the repository and run tests in their own fork
+
+### Workarounds for External Contributors
+If you need to run tests without creating a Pull Request:
+1. Fork the repository
+2. Enable GitHub Actions in your fork
+3. Run the tests in your forked repository
+
+For active contributors, repository maintainers can grant collaborator access on a case-by-case basis
