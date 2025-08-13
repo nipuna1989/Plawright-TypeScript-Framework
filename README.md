@@ -1,6 +1,6 @@
-# RemWaste UI Test Framework
+# Playwright TypeScript UI Test Framework
 
-A Playwright-based test automation framework for the RemWaste assignment, featuring end-to-end testing and CI/CD integration.
+A Playwright-TypeScript based test automation framework, featuring end-to-end testing and CI/CD integration.
 
 ## 📋 Table of Contents
 
@@ -19,7 +19,7 @@ A Playwright-based test automation framework for the RemWaste assignment, featur
 
 ## Overview
 
-This framework provides automated testing capabilities for the RemWaste assignment using Playwright. It includes:
+This framework provides automated testing capabilities for the using Playwright and TypeScript. It includes:
 
 - **End-to-End Testing**: Login with valid/invalid scenarios. Create/edit/delete article.
 - **CI/CD Integration**: GitHub Actions workflow
@@ -29,7 +29,7 @@ This framework provides automated testing capabilities for the RemWaste assignme
 ## 📁 Project Structure
 
 ```
-remwaste-ui-framework/
+Playwright-TypeScript-ui-framework/
 ├── .github/
 │   └── workflows/
 │       └── test.yml                 # GitHub Actions CI/CD pipeline
@@ -71,13 +71,13 @@ Before setting up the project, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/nipuna1989/remwaste-ui-framework
+git clone https://github.com/nipuna1989/Plawright-TypeScript-Framework
 ```
 
 ### 2. Navigate to Project Directory
 
 ```bash
-cd remwaste-ui-framework
+cd Plawright-TypeScript-Framework
 ```
 
 ### 3. Install Dependencies
